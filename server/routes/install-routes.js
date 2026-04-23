@@ -50,6 +50,8 @@ function installRoutes(app) {
   // Our own viewer app styles and scripts
   app.use('/assets', express.static(path.join(__dirname, '../../dist/assets')));
 
+  app.use('/_viewer/media', timeoutMiddleware, require('./media-proxy-routes'));
+
   app.use('/', timeoutMiddleware, require('./room-directory-routes'));
 
   // For room aliases (/r) or room ID's (/roomid)

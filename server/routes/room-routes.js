@@ -902,7 +902,7 @@ router.get(
         roomData.avatarUrl &&
         mxcUrlToHttpThumbnail({
           mxcUrl: roomData.avatarUrl,
-          homeserverUrl: matrixServerUrl,
+          mediaBaseUrl: basePath,
           size: 256,
         }),
       blockedBySafeSearch: isNsfw,

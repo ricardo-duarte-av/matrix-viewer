@@ -16,7 +16,7 @@ const blockedBySafeSearchAvatarViewModel = new AvatarViewModel({
 class RoomCardView extends TemplateView {
   render(t, vm) {
     const avatarViewModel = new AvatarViewModel({
-      homeserverUrlToPullMediaFrom: vm.homeserverUrlToPullMediaFrom,
+      mediaBaseUrl: vm.mediaBaseUrl,
       avatarUrl: vm.mxcAvatarUrl,
       avatarTitle: vm.name || vm.canonicalAlias || vm.roomId,
       avatarLetterString:

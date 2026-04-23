@@ -8,19 +8,18 @@ const MatrixViewerURLCreator = require('matrix-viewer-shared/lib/url-creator');
 class RoomCardViewModel extends ViewModel {
   constructor(options) {
     super(options);
-    const { room, basePath, homeserverUrlToPullMediaFrom, viaServers } = options;
+    const { room, basePath, viaServers } = options;
     assert(room);
     assert(basePath);
-    assert(homeserverUrlToPullMediaFrom);
     assert(viaServers);
 
+    this._basePath = basePath;
     this._matrixViewerURLCreator = new MatrixViewerURLCreator(basePath);
 
     this._roomId = room.room_id;
     this._canonicalAlias = room.canonical_alias;
     this._name = room.name;
     this._mxcAvatarUrl = room.avatar_url;
-    this._homeserverUrlToPullMediaFrom = homeserverUrlToPullMediaFrom;
     this._numJoinedMembers = room.num_joined_members;
     this._topic = room.topic;
 
@@ -45,8 +44,8 @@ class RoomCardViewModel extends ViewModel {
     return this._mxcAvatarUrl;
   }
 
-  get homeserverUrlToPullMediaFrom() {
-    return this._homeserverUrlToPullMediaFrom;
+  get mediaBaseUrl() {
+    return this._basePath;
   }
 
   get numJoinedMembers() {

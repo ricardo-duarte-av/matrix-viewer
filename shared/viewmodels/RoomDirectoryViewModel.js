@@ -79,7 +79,6 @@ class RoomDirectoryViewModel extends ViewModel {
         new RoomCardViewModel({
           room,
           basePath,
-          homeserverUrlToPullMediaFrom: homeserverUrl,
           viaServers: [
             // If the room is being shown in the directory from this server, then surely
             // we can join via this server

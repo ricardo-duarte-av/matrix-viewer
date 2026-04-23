@@ -9,14 +9,13 @@ class AvatarViewModel extends ViewModel {
   constructor(options) {
     super(options);
 
-    const { homeserverUrlToPullMediaFrom, avatarUrl, avatarTitle, avatarLetterString, entityId } =
-      options;
-    assert(!avatarUrl || homeserverUrlToPullMediaFrom);
+    const { mediaBaseUrl, avatarUrl, avatarTitle, avatarLetterString, entityId } = options;
+    assert(!avatarUrl || mediaBaseUrl);
     assert(avatarTitle);
     assert(avatarLetterString);
     assert(entityId);
 
-    this._homeserverUrlToPullMediaFrom = homeserverUrlToPullMediaFrom;
+    this._mediaBaseUrl = mediaBaseUrl;
     this._avatarUrl = avatarUrl;
     this._avatarTitle = avatarTitle;
     this._avatarLetterString = avatarLetterString;
@@ -27,7 +26,7 @@ class AvatarViewModel extends ViewModel {
     if (this._avatarUrl) {
       return mxcUrlToHttpThumbnail({
         mxcUrl: this._avatarUrl,
-        homeserverUrl: this._homeserverUrlToPullMediaFrom,
+        mediaBaseUrl: this._mediaBaseUrl,
         size,
       });
     }

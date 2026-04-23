@@ -111,7 +111,7 @@ class RoomViewModel extends ViewModel {
     this._currentTopPositionEventEntry = events && eventEntriesByEventId[events[events.length - 1]];
 
     this._roomAvatarViewModel = new AvatarViewModel({
-      homeserverUrlToPullMediaFrom: homeserverUrl,
+      mediaBaseUrl: basePath,
       avatarUrl: this._room.avatarUrl,
       avatarTitle: this._room.name || this._room.canonicalAlias || this._room.id,
       avatarLetterString:
