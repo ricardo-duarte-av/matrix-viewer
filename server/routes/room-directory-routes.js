@@ -58,7 +58,7 @@ router.get(
     // to filter any out but then the pagination tokens with the homeserver
     // will be out of sync. XXX: It would be better if we could just filter
     // `/publicRooms` directly via the API (needs MSC).
-    const limit = 9;
+    const limit = 24;
 
     let rooms = [];
     let nextPaginationToken;

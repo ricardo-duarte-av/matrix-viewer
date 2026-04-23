@@ -239,7 +239,7 @@
 
 .RoomDirectoryView_mainContentSection {
   width: 100%;
-  max-width: 1180px;
+  max-width: 1600px;
   padding-left: 20px;
   padding-right: 20px;
   margin-top: 15px;
@@ -249,6 +249,7 @@
 .RoomDirectoryView_roomList {
   display: grid;
   gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
 }
 
 .RoomDirectoryView_roomListError {
@@ -271,16 +272,6 @@
     margin-top: 30px;
     padding-left: 40px;
     padding-right: 40px;
-  }
-
-  .RoomDirectoryView_roomList {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1100px) {
-  .RoomDirectoryView_roomList {
-    grid-template-columns: repeat(3, 1fr);
   }
 }
 
