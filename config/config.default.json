@@ -12,6 +12,9 @@
   "logOutputFromChildProcesses": false,
   //"stopSearchEngineIndexing": true,
   "workaroundCloudflare504TimeoutErrors": false,
+  // "public_rooms": show all public world_readable rooms from the homeserver directory (default)
+  // "joined_rooms": show only rooms the viewer account is currently joined to
+  "roomDirectoryType": "public_rooms",
   // Tracing
   //"jaegerTracesEndpoint": "http://localhost:14268/api/traces",
 
