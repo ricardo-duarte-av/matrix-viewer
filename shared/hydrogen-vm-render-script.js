@@ -82,10 +82,41 @@ async function mountHydrogen() {
   // page don't say `undefined`.
   urlRouter.attach();
 
-  const mediaRepository = new MediaRepository({
-    // Strip the trailing slash from the URL
+  // Wrap MediaRepository so thumbnail/download URLs go through our
+  // server-side proxy (which adds the Authorization header) instead of
+  // hitting the homeserver directly. The r0 endpoints Hydrogen generates
+  // require authentication since Matrix 1.11.
+  const baseMediaRepository = new MediaRepository({
     homeserver: config.matrixServerUrl.replace(/\/$/, ''),
   });
+  const _proxyBase = config.basePath.replace(/\/$/, '');
+  function _parseMxc(url) {
+    if (!url || !url.startsWith('mxc://')) return null;
+    const [serverName, mediaId] = url.slice('mxc://'.length).split('/', 2);
+    return serverName && mediaId ? [serverName, mediaId] : null;
+  }
+  const mediaRepository = {
+    mxcUrlThumbnail(url, width, height, method) {
+      const parts = _parseMxc(url);
+      if (!parts) return undefined;
+      const [serverName, mediaId] = parts;
+      const qs = new URLSearchParams({
+        width: Math.round(width),
+        height: Math.round(height),
+        method,
+      });
+      return `${_proxyBase}/_viewer/media/thumbnail/${encodeURIComponent(serverName)}/${encodeURIComponent(mediaId)}?${qs}`;
+    },
+    mxcUrl(url) {
+      const parts = _parseMxc(url);
+      if (!parts) return undefined;
+      const [serverName, mediaId] = parts;
+      return `${_proxyBase}/_viewer/media/download/${encodeURIComponent(serverName)}/${encodeURIComponent(mediaId)}`;
+    },
+    downloadEncryptedFile: (...args) => baseMediaRepository.downloadEncryptedFile(...args),
+    downloadPlaintextFile: (...args) => baseMediaRepository.downloadPlaintextFile(...args),
+    downloadAttachment: (...args) => baseMediaRepository.downloadAttachment(...args),
+  };
 
   const room = {
     name: roomData.name,
