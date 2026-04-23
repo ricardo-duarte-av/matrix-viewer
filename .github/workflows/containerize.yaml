@@ -7,7 +7,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  GHCR_NAMESPACE: matrix-org/matrix-viewer
+  GHCR_NAMESPACE: ${{ github.repository_owner }}
   IMAGE_NAME: matrix-viewer
 
 jobs:
