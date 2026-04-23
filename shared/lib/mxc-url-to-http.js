@@ -7,7 +7,9 @@ function mxcUrlToHttp({ mxcUrl, mediaBaseUrl }) {
   assert(mediaBaseUrl, '`mediaBaseUrl` must be provided to `mxcUrlToHttp(...)`');
   const [serverName, mediaId] = mxcUrl.substr('mxc://'.length).split('/', 2);
   const base = mediaBaseUrl.replace(/\/$/, '');
-  return `${base}/_viewer/media/download/${encodeURIComponent(serverName)}/${encodeURIComponent(mediaId)}`;
+  return `${base}/_viewer/media/download/${encodeURIComponent(serverName)}/${encodeURIComponent(
+    mediaId
+  )}`;
 }
 
 const ALLOWED_RESIZE_METHODS = ['scale', 'crop'];
@@ -27,7 +29,9 @@ function mxcUrlToHttpThumbnail({ mxcUrl, mediaBaseUrl, size, resizeMethod = 'sca
   qs.append('method', resizeMethod);
 
   const base = mediaBaseUrl.replace(/\/$/, '');
-  return `${base}/_viewer/media/thumbnail/${encodeURIComponent(serverName)}/${encodeURIComponent(mediaId)}?${qs.toString()}`;
+  return `${base}/_viewer/media/thumbnail/${encodeURIComponent(serverName)}/${encodeURIComponent(
+    mediaId
+  )}?${qs.toString()}`;
 }
 
 module.exports = { mxcUrlToHttp, mxcUrlToHttpThumbnail };

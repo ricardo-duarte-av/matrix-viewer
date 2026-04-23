@@ -31,7 +31,9 @@ router.get(
 
     const url = urlJoin(
       matrixServerUrl,
-      `/_matrix/client/v1/media/thumbnail/${encodeURIComponent(serverName)}/${encodeURIComponent(mediaId)}?${qs.toString()}`
+      `/_matrix/client/v1/media/thumbnail/${encodeURIComponent(serverName)}/${encodeURIComponent(
+        mediaId
+      )}?${qs.toString()}`
     );
 
     const mediaRes = await fetchEndpoint(url, { accessToken: matrixAccessToken });
@@ -52,7 +54,9 @@ router.get(
 
     const url = urlJoin(
       matrixServerUrl,
-      `/_matrix/client/v1/media/download/${encodeURIComponent(serverName)}/${encodeURIComponent(mediaId)}`
+      `/_matrix/client/v1/media/download/${encodeURIComponent(serverName)}/${encodeURIComponent(
+        mediaId
+      )}`
     );
 
     const mediaRes = await fetchEndpoint(url, { accessToken: matrixAccessToken });

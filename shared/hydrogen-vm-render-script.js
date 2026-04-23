@@ -105,13 +105,17 @@ async function mountHydrogen() {
         height: Math.round(height),
         method,
       });
-      return `${_proxyBase}/_viewer/media/thumbnail/${encodeURIComponent(serverName)}/${encodeURIComponent(mediaId)}?${qs}`;
+      return `${_proxyBase}/_viewer/media/thumbnail/${encodeURIComponent(
+        serverName
+      )}/${encodeURIComponent(mediaId)}?${qs}`;
     },
     mxcUrl(url) {
       const parts = _parseMxc(url);
       if (!parts) return undefined;
       const [serverName, mediaId] = parts;
-      return `${_proxyBase}/_viewer/media/download/${encodeURIComponent(serverName)}/${encodeURIComponent(mediaId)}`;
+      return `${_proxyBase}/_viewer/media/download/${encodeURIComponent(
+        serverName
+      )}/${encodeURIComponent(mediaId)}`;
     },
     downloadEncryptedFile: (...args) => baseMediaRepository.downloadEncryptedFile(...args),
     downloadPlaintextFile: (...args) => baseMediaRepository.downloadPlaintextFile(...args),
