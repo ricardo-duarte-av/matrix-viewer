@@ -57,6 +57,7 @@ const matrixServerUrl = config.get('matrixServerUrl');
 assert(matrixServerUrl);
 const matrixAccessToken = config.get('matrixAccessToken');
 assert(matrixAccessToken);
+const roomDirectoryType = config.get('roomDirectoryType') || 'public_rooms';
 
 const matrixViewerURLCreator = new MatrixViewerURLCreator(basePath);
 
@@ -825,8 +826,10 @@ router.get(
       }),
     ]);
 
-    // Only `world_readable` rooms are viewable
-    const allowedToViewRoom = roomData.historyVisibility === 'world_readable';
+    // In joined_rooms mode the viewer account is a member, so it can read any room
+    // it is joined to regardless of history_visibility.
+    const allowedToViewRoom =
+      roomDirectoryType === 'joined_rooms' || roomData.historyVisibility === 'world_readable';
 
     if (!allowedToViewRoom) {
       throw new StatusError(
