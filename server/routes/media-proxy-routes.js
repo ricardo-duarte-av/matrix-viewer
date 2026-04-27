@@ -25,8 +25,10 @@ router.get(
     const { serverName, mediaId } = req.params;
 
     const qs = new URLSearchParams();
-    if (req.query.width) qs.append('width', req.query.width);
-    if (req.query.height) qs.append('height', req.query.height);
+    const width = parseInt(req.query.width, 10);
+    const height = parseInt(req.query.height, 10);
+    qs.append('width', Number.isInteger(width) ? width : 400);
+    qs.append('height', Number.isInteger(height) ? height : 400);
     if (req.query.method) qs.append('method', req.query.method);
 
     const url = urlJoin(
